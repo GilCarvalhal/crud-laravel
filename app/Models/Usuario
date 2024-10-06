@@ -7,18 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 {
-
+    use HasFactory;
     public $timestamps = false;
 
     protected $table = 'usuario';
 
     protected $connection = 'mysql';
 
-    protected $primarykey = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'nome',
         'idade',
         'cpf'
     ];
+
+    public function getFillable()
+    {
+        return $this->fillable;
+    }
 }
