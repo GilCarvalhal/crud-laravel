@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('/css/content.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/topo.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
 </head>
 
 <body>
