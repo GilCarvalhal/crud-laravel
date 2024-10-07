@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('/css/topo.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/form.css') }}">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
     </div>
 
     @include('layouts.footer')
-    @yield('js')
+    @yield('scripts')
 </body>
 
 </html>

@@ -3,6 +3,23 @@
 @section('title', 'Bem vindo ao CRUD!')
 
 @section('content')
+    <form action="#" method="POST" class="form-cadastro">
+        @csrf
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <div>
+            <label for="idade">Idade:</label>
+            <input type="text" id="idade" name="idade" required>
+        </div>
+        <div>
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" required>
+        </div>
+        <input type="submit" value="Cadastrar">
+    </form>
+
     <table>
         <thead>
             <tr>
@@ -11,17 +28,15 @@
                 <th>CPF</th>
             </tr>
         </thead>
+
         <tbody>
-            <tr>
-                <td>Gil</td>
-                <td>30</td>
-                <td>12345678910</td>
-            </tr>
-            <tr>
-                <td>Juberto</td>
-                <td>21</td>
-                <td>01987654321</td>
-            </tr>
+            @foreach ($usuarios as $usuario)
+                <tr>
+                    <td>{{ $usuario->nome }}</td>
+                    <td>{{ $usuario->idade }}</td>
+                    <td>{{ $usuario->cpf }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 @endsection

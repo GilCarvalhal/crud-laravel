@@ -1,14 +1,16 @@
 table {
-    width: 20%;
+    width: 50%;
     margin: 20px auto;
     border-collapse: collapse;
 }
+
 th,
 td {
     padding: 10px;
     border: 1px solid #000;
     text-align: center;
 }
+
 th {
     background-color: #f4f4f4;
 }
