@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,5 +42,13 @@ class UsuarioController extends Controller
             Log::error($e);
             return redirect()->back()->with('message-error', $e->getMessage());
         }
+    }
+
+    public function edit($id)
+    {
+        $usuario = Usuario::findOrFail($id);
+
+        // dd($usuario);
+        return view('usuario.edit', ['usuario' => $usuario]);
     }
 }

@@ -3,7 +3,7 @@
 @section('title', 'Bem vindo ao CRUD!')
 
 @section('content')
-    <form action="#" method="POST" class="form-cadastro">
+    <form action="{{ route('usuario.store') }}" method="POST" class="form-cadastro">
         @csrf
         <div>
             <label for="nome">Nome:</label>
@@ -26,6 +26,7 @@
                 <th>Nome</th>
                 <th>Idade</th>
                 <th>CPF</th>
+                <th>Ações</th>
             </tr>
         </thead>
 
@@ -35,6 +36,9 @@
                     <td>{{ $usuario->nome }}</td>
                     <td>{{ $usuario->idade }}</td>
                     <td>{{ $usuario->cpf }}</td>
+                    <td><a href="{{ route('usuario.edit', ['id' => $usuario->id]) }}">Editar</a>
+                        <a href="">Excluir</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
