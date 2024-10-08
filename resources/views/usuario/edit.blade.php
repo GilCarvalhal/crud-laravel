@@ -3,9 +3,8 @@
 @section('title', 'Editar Usuário')
 
 @section('content')
-    <form action="#" method="POST" class="form-cadastro">
+    <form action="{{ route('usuario.update', $usuario->id) }}" method="POST" class="form-cadastro">
         @csrf
-        @method('PUT')
         <div>
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" value="{{ isset($usuario->nome) ? $usuario->nome : '' }}"

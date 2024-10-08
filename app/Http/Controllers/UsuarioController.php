@@ -36,7 +36,7 @@ class UsuarioController extends Controller
             );
 
             DB::commit();
-            return redirect()->route('welcome')->with('success', 'Cadastro finalizado com sucesso!');
+            return redirect()->route('welcome')->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
             DB::rollBack();
             Log::error($e);
@@ -50,5 +50,27 @@ class UsuarioController extends Controller
 
         // dd($usuario);
         return view('usuario.edit', ['usuario' => $usuario]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction(); // Inicia uma nova transação
+        try {
+            DB::update(
+                "update usuario set nome = ?, idade = ?, cpf = ? where id = ?",
+                [
+                    $request->input('nome'),
+                    $request->input('idade'),
+                    $request->input('cpf'),
+                    $id
+                ]
+            );
+            DB::commit(); // Confirma a transação
+            return redirect()->route('usuario.index', $id)->with('success', 'Cadastro atualizado com sucesso!');
+        } catch (Exception $e) {
+            DB::rollBack(); // Reverte a transação em caso de erro
+            Log::error($e); // Registra o erro no log
+            return redirect()->route('usuario.edit', $id)->with('message-error', $e->getMessage());
+        }
     }
 }
