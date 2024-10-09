@@ -36,9 +36,9 @@
                     <td>{{ $usuario->nome }}</td>
                     <td>{{ $usuario->idade }}</td>
                     <td>{{ $usuario->cpf }}</td>
-                    <td><a href="{{ route('usuario.edit', ['id' => $usuario->id]) }}">Editar</a>
+                    <td><a href="{{ route('usuario.edit', ['id' => $usuario->id]) }}" class="btn-editar">Editar</a>
                         <form action="{{ route('usuario.delete', ['id' => $usuario->id]) }}" method="POST"
-                            style="display: inline">
+                            style="display: inline" class="btn-excluir">
                             @csrf
                             <button type="submit"
                                 onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</button>
