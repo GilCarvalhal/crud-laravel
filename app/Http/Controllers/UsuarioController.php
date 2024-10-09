@@ -73,4 +73,14 @@ class UsuarioController extends Controller
             return redirect()->route('usuario.edit', $id)->with('message-error', $e->getMessage());
         }
     }
+
+    public function delete($id)
+    {
+        try {
+            DB::delete("delete from usuario where id = ?", [$id]);
+            return redirect()->route('usuario.index')->with('success', 'Cadastro excluido com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->route('usuario.index')->with('message-error', $e->getMessage());
+        }
+    }
 }

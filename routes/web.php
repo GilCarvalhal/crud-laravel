@@ -9,3 +9,4 @@ Route::get('/', [UsuarioController::class, 'index'])->name('usuario.index');
 Route::post('/', [UsuarioController::class, 'store'])->name('usuario.store');
 Route::get('/usuario/edit/{id}', [UsuarioController::class, 'edit'])->name('usuario.edit');
 Route::post('/usuario/update/{id}', [UsuarioController::class, 'update'])->name('usuario.update');
+Route::post('/usuario/delete/{id}', [UsuarioController::class, 'delete'])->name('usuario.delete');
