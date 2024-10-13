@@ -16,9 +16,9 @@
                 required>
         </div>
         <div>
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" value="{{ isset($usuario->cpf) ? $usuario->cpf : '' }}"
-                required>
+            <label for="contato">Contato:</label>
+            <input type="text" id="contato" name="contato"
+                value="{{ isset($usuario->contato) ? $usuario->contato : '' }}" required>
         </div>
         <input type="submit" value="Atualizar">
         <button type="button" class="btn-voltar" onclick="retornar()">Voltar</button>

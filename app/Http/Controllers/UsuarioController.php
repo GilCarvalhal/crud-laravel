@@ -18,20 +18,21 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $validatedData = $request->validate([
                 'nome' => 'required|string|max:255',
                 'idade' => 'required|numeric|min:18|max:120',
-                'cpf' => 'required|string|digits_between:11,14'
+                'contato' => 'nullable|string|digits_between:11,14'
             ]);
 
             DB::insert(
-                'insert into usuario(nome, idade, cpf) values (?, ?, ?)',
+                'insert into usuario(nome, idade, contato) values (?, ?, ?)',
                 [
                     $validatedData['nome'],
                     $validatedData['idade'],
-                    $validatedData['cpf'],
+                    $validatedData['contato'],
                 ]
             );
 
@@ -39,6 +40,7 @@ class UsuarioController extends Controller
             return redirect()->route('welcome')->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
             DB::rollBack();
+            // dd($e);
             Log::error($e);
             return redirect()->back()->with('message-error', $e->getMessage());
         }
@@ -57,11 +59,11 @@ class UsuarioController extends Controller
         DB::beginTransaction(); // Inicia uma nova transação
         try {
             DB::update(
-                "update usuario set nome = ?, idade = ?, cpf = ? where id = ?",
+                "update usuario set nome = ?, idade = ?, contato = ? where id = ?",
                 [
                     $request->input('nome'),
                     $request->input('idade'),
-                    $request->input('cpf'),
+                    $request->input('contato'),
                     $id
                 ]
             );

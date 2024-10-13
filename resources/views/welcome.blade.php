@@ -6,7 +6,7 @@
     <form action="{{ route('usuario.store') }}" method="POST" class="form-cadastro">
         @csrf
         <div>
-            <label for="nome">Nome:</label>
+            <label for="nome">Nome Completo:</label>
             <input type="text" id="nome" name="nome" required>
         </div>
         <div>
@@ -14,8 +14,8 @@
             <input type="text" id="idade" name="idade" required>
         </div>
         <div>
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" required>
+            <label for="contato">Contato:</label>
+            <input type="text" id="contato" name="contato" required>
         </div>
         <input type="submit" value="Cadastrar">
     </form>
@@ -25,7 +25,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Idade</th>
-                <th>CPF</th>
+                <th>Contato</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -35,7 +35,7 @@
                 <tr>
                     <td>{{ $usuario->nome }}</td>
                     <td>{{ $usuario->idade }}</td>
-                    <td>{{ $usuario->cpf }}</td>
+                    <td>{{ $usuario->contato }}</td>
                     <td><a href="{{ route('usuario.edit', ['id' => $usuario->id]) }}" class="btn-editar">Editar</a>
                         <form action="{{ route('usuario.delete', ['id' => $usuario->id]) }}" method="POST"
                             style="display: inline" class="btn-excluir">

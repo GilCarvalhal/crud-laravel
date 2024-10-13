@@ -19,7 +19,7 @@ class Usuario extends Model
     protected $fillable = [
         'nome',
         'idade',
-        'cpf'
+        'contato'
     ];
 
     public function getFillable()
