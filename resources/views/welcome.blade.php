@@ -36,7 +36,8 @@
                     <td>{{ $usuario->nome }}</td>
                     <td>{{ $usuario->idade }}</td>
                     <td>{{ $usuario->contato }}</td>
-                    <td><a href="{{ route('usuario.edit', ['id' => $usuario->id]) }}" class="btn-editar">Editar</a>
+                    <td><a href="{{ route('usuario.show', ['id' => $usuario->id]) }}" class="btn-show">Detalhes</a>
+                        <a href="{{ route('usuario.edit', ['id' => $usuario->id]) }}" class="btn-editar">Editar</a>
                         <form action="{{ route('usuario.delete', ['id' => $usuario->id]) }}" method="POST"
                             style="display: inline" class="btn-excluir">
                             @csrf

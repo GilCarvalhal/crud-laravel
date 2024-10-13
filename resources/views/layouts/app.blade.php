@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/form.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/edit.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/show.css') }}">
 </head>
 
 <body>

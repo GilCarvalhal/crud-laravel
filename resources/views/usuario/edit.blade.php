@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Editar Usuário')
+@section('title', 'Editar usuário')
 
 @section('content')
     <form action="{{ route('usuario.update', $usuario->id) }}" method="POST" class="form-cadastro">

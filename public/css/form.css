@@ -69,3 +69,17 @@ button {
 .btn-excluir:hover {
     background-color: #c82333;
 }
+
+.btn-show {
+    background-color: #17a2b8;
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    display: inline-block;
+}
+
+.btn-show:hover {
+    background-color: #138496;
+}

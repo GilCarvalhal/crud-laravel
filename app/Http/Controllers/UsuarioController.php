@@ -18,7 +18,6 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try {
             $validatedData = $request->validate([
@@ -40,7 +39,6 @@ class UsuarioController extends Controller
             return redirect()->route('welcome')->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
             DB::rollBack();
-            // dd($e);
             Log::error($e);
             return redirect()->back()->with('message-error', $e->getMessage());
         }
@@ -50,7 +48,6 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
 
-        // dd($usuario);
         return view('usuario.edit', ['usuario' => $usuario]);
     }
 
@@ -84,5 +81,13 @@ class UsuarioController extends Controller
         } catch (Exception $e) {
             return redirect()->route('usuario.index')->with('message-error', $e->getMessage());
         }
+    }
+
+    public function show($id)
+    {
+
+        $usuario = Usuario::findOrFail($id);
+
+        return view('usuario.show', compact('usuario'));
     }
 }
