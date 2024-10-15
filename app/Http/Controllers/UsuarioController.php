@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Endereco;
 use App\Models\Usuario;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = DB::select("select * from usuario");
+        $usuarios = DB::select("select * from usuario
+        left join endereco on usuario.endereco_id = endereco.id");
         return view('welcome', compact('usuarios'));
     }
 
@@ -20,23 +22,30 @@ class UsuarioController extends Controller
     {
         DB::beginTransaction();
         try {
-            $validatedData = $request->validate([
-                'nome' => 'required|string|max:255',
-                'idade' => 'required|numeric|min:18|max:120',
-                'contato' => 'nullable|string|digits_between:11,14'
-            ]);
+            $endereco = new Endereco();
+            $endereco->cep = $request->input('cep');
+            $endereco->endereco = $request->input('endereco');
+            $endereco->bairro = $request->input('bairro');
+            $endereco->cidade = $request->input('cidade');
+            $endereco->estado = $request->input('estado');
+            $endereco->numero = $request->input('numero');
+            $endereco->save();
+
+            $enderecoId = $endereco->id;
 
             DB::insert(
-                'insert into usuario(nome, idade, contato) values (?, ?, ?)',
+                'insert into usuario (nome, idade, contato, endereco_id)
+                values (?, ?, ?, ?)',
                 [
-                    $validatedData['nome'],
-                    $validatedData['idade'],
-                    $validatedData['contato'],
+                    $request->input('nome'),
+                    $request->input('idade'),
+                    $request->input('contato'),
+                    $enderecoId
                 ]
             );
 
             DB::commit();
-            return redirect()->route('welcome')->with('success', 'Cadastrado com sucesso!');
+            return redirect()->route('usuario.index')->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
             DB::rollBack();
             Log::error($e);
@@ -75,10 +84,17 @@ class UsuarioController extends Controller
 
     public function delete($id)
     {
+        // dd($id);
+        DB::beginTransaction();
         try {
             DB::delete("delete from usuario where id = ?", [$id]);
+
+            DB::commit();
             return redirect()->route('usuario.index')->with('success', 'Cadastro excluido com sucesso!');
         } catch (Exception $e) {
+            DB::rollBack();
+            dd($e);
+            Log::error($e);
             return redirect()->route('usuario.index')->with('message-error', $e->getMessage());
         }
     }

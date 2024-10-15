@@ -46,3 +46,4 @@ Route::get('/usuario/edit/{id}', [UsuarioController::class, 'edit'])->name('usua
 Route::post('/usuario/update/{id}', [UsuarioController::class, 'update'])->name('usuario.update');
 Route::post('/usuario/delete/{id}', [UsuarioController::class, 'delete'])->name('usuario.delete');
 Route::get('/usuario/show/{id}', [UsuarioController::class, 'show'])->name('usuario.show');
+

@@ -19,11 +19,17 @@ class Usuario extends Model
     protected $fillable = [
         'nome',
         'idade',
-        'contato'
+        'contato',
+        'endereco_id'
     ];
 
     public function getFillable()
     {
         return $this->fillable;
+    }
+
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class, 'endereco_id', 'id');
     }
 }
