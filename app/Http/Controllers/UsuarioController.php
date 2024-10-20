@@ -99,24 +99,34 @@ class UsuarioController extends Controller
 
     public function delete($id)
     {
+        // dd($id);
         DB::beginTransaction();
         try {
-            DB::delete("delete from usuario where id = ?", [$id]);
+            $usuario = Usuario::find($id);
+            $usuario->delete();
+
+            $endereco = $usuario->endereco;
+            $endereco->delete();
 
             DB::commit();
             return redirect()->route('usuario.index')->with('success', 'Cadastro excluido com sucesso!');
         } catch (Exception $e) {
             DB::rollBack();
             Log::error($e);
+            dd($e);
             return redirect()->route('usuario.index')->with('message-error', $e->getMessage());
         }
     }
 
     public function show($id)
     {
+        try {
+            $usuario = Usuario::findOrFail($id);
 
-        $usuario = Usuario::findOrFail($id);
-
-        return view('usuario.show', compact('usuario'));
+            return view('usuario.show', compact('usuario'));
+        } catch (Exception $e) {
+            Log::error($e);
+            return redirect()->route('usuario.index')->with('error', $e->getMessage());
+        }
     }
 }
