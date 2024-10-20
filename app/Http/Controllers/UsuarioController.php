@@ -13,8 +13,11 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = DB::select("select * from usuario
-        left join endereco on usuario.endereco_id = endereco.id");
+        $usuarios = DB::select("select usuario.id, usuario.nome, usuario.idade, usuario.contato,
+        endereco.cep, endereco.endereco, endereco.bairro, endereco.cidade, endereco.estado, endereco.numero
+        from usuario
+        join endereco on usuario.endereco_id = endereco.id");
+        // dd($usuarios);
         return view('welcome', compact('usuarios'));
     }
 
@@ -31,18 +34,12 @@ class UsuarioController extends Controller
             $endereco->numero = $request->input('numero');
             $endereco->save();
 
-            $enderecoId = $endereco->id;
-
-            DB::insert(
-                'insert into usuario (nome, idade, contato, endereco_id)
-                values (?, ?, ?, ?)',
-                [
-                    $request->input('nome'),
-                    $request->input('idade'),
-                    $request->input('contato'),
-                    $enderecoId
-                ]
-            );
+            $usuario = new Usuario();
+            $usuario->nome = $request->input('nome');
+            $usuario->idade = $request->input('idade');
+            $usuario->contato = $request->input('contato');
+            $usuario->endereco_id = $endereco->id;
+            $usuario->save();
 
             DB::commit();
             return redirect()->route('usuario.index')->with('success', 'Cadastrado com sucesso!');
@@ -55,9 +52,18 @@ class UsuarioController extends Controller
 
     public function edit($id)
     {
-        $usuario = Usuario::findOrFail($id);
+        try {
+            $usuario = Usuario::find($id);
+            // dd($usuario);
 
-        return view('usuario.edit', ['usuario' => $usuario]);
+            $endereco = $usuario->endereco;
+
+            return view('usuario.edit', compact('usuario', 'endereco'));
+        } catch (Exception $e) {
+            Log::error($e);
+            dd($e);
+            return redirect()->route('usuario.index')->with('message-error', $e->getMessage());
+        }
     }
 
     public function update(Request $request, $id)
@@ -73,6 +79,16 @@ class UsuarioController extends Controller
                     $id
                 ]
             );
+
+            $endereco = Endereco::findOrFail($request->input('endereco_id'));
+            $endereco->cep = $request->input('cep');
+            $endereco->endereco = $request->input('endereco');
+            $endereco->bairro = $request->input('bairro');
+            $endereco->cidade = $request->input('cidade');
+            $endereco->estado = $request->input('estado');
+            $endereco->numero = $request->input('numero');
+            $endereco->save();
+
             DB::commit(); // Confirma a transação
             return redirect()->route('usuario.index', $id)->with('success', 'Cadastro atualizado com sucesso!');
         } catch (Exception $e) {
