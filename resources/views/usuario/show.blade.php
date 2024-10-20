@@ -17,6 +17,31 @@
             <label for="contato"><strong>Contato:</strong></label>
             <span id="contato">{{ $usuario->contato ?? 'Não informado' }}</span>
         </div>
+
+        <div>
+            <label for="cep"><strong>Cep:</strong></label>
+            <span id="cep">{{ $usuario->endereco->cep ?? 'Não informado' }}</span>
+        </div>
+        <div>
+            <label for="endereco"><strong>Endereço:</strong></label>
+            <span id="endereco">{{ $usuario->endereco->endereco ?? 'Não informado' }}</span>
+        </div>
+        <div>
+            <label for="bairro"><strong>Bairro:</strong></label>
+            <span id="bairro">{{ $usuario->endereco->bairro ?? 'Não informado' }}</span>
+        </div>
+        <div>
+            <label for="cidade"><strong>Cidade:</strong></label>
+            <span id="cidade">{{ $usuario->endereco->cidade ?? 'Não informado' }}</span>
+        </div>
+        <div>
+            <label for="estado"><strong>Estado:</strong></label>
+            <span id="estado">{{ $usuario->endereco->estado ?? 'Não informado' }}</span>
+        </div>
+        <div>
+            <label for="numero"><strong>Número:</strong></label>
+            <span id="numero">{{ $usuario->endereco->numero ?? 'Não informado' }}</span>
+        </div>
         <button type="button" class="btn-voltar" onclick="retornar()">Voltar</button>
     </div>
 @endsection

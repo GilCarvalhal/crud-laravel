@@ -99,7 +99,6 @@ class UsuarioController extends Controller
 
     public function delete($id)
     {
-        // dd($id);
         DB::beginTransaction();
         try {
             $usuario = Usuario::find($id);
@@ -113,7 +112,6 @@ class UsuarioController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             Log::error($e);
-            dd($e);
             return redirect()->route('usuario.index')->with('message-error', $e->getMessage());
         }
     }
@@ -122,6 +120,8 @@ class UsuarioController extends Controller
     {
         try {
             $usuario = Usuario::findOrFail($id);
+
+            $endereco = $usuario->endereco;
 
             return view('usuario.show', compact('usuario'));
         } catch (Exception $e) {
