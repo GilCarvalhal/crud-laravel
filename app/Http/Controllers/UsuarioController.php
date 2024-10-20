@@ -13,12 +13,16 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = DB::select("select usuario.id, usuario.nome, usuario.idade, usuario.contato,
-        endereco.cep, endereco.endereco, endereco.bairro, endereco.cidade, endereco.estado, endereco.numero
-        from usuario
-        join endereco on usuario.endereco_id = endereco.id");
-        // dd($usuarios);
-        return view('welcome', compact('usuarios'));
+        try {
+            $usuarios = DB::select("select usuario.id, usuario.nome, usuario.idade, usuario.contato,
+            endereco.cep, endereco.endereco, endereco.bairro, endereco.cidade, endereco.estado, endereco.numero
+            from usuario
+            join endereco on usuario.endereco_id = endereco.id");
+            return view('welcome', compact('usuarios'));
+        } catch (Exception $e) {
+            Log::error($e);
+            return redirect()->route('usuario.index')->with('error', $e->getMessage());
+        }
     }
 
     public function store(Request $request)
@@ -54,14 +58,13 @@ class UsuarioController extends Controller
     {
         try {
             $usuario = Usuario::find($id);
-            // dd($usuario);
 
+            // O usuário acima está chamando a model Usuario e endereco é a função que está dentro da model.
             $endereco = $usuario->endereco;
 
             return view('usuario.edit', compact('usuario', 'endereco'));
         } catch (Exception $e) {
             Log::error($e);
-            dd($e);
             return redirect()->route('usuario.index')->with('message-error', $e->getMessage());
         }
     }
@@ -70,17 +73,13 @@ class UsuarioController extends Controller
     {
         DB::beginTransaction(); // Inicia uma nova transação
         try {
-            DB::update(
-                "update usuario set nome = ?, idade = ?, contato = ? where id = ?",
-                [
-                    $request->input('nome'),
-                    $request->input('idade'),
-                    $request->input('contato'),
-                    $id
-                ]
-            );
+            $usuario = Usuario::findOrFail($id);
+            $usuario->nome = $request->input('nome');
+            $usuario->idade = $request->input('idade');
+            $usuario->contato = $request->input('contato');
+            $usuario->save();
 
-            $endereco = Endereco::findOrFail($request->input('endereco_id'));
+            $endereco = $usuario->endereco;
             $endereco->cep = $request->input('cep');
             $endereco->endereco = $request->input('endereco');
             $endereco->bairro = $request->input('bairro');
@@ -100,7 +99,6 @@ class UsuarioController extends Controller
 
     public function delete($id)
     {
-        // dd($id);
         DB::beginTransaction();
         try {
             DB::delete("delete from usuario where id = ?", [$id]);
@@ -109,7 +107,6 @@ class UsuarioController extends Controller
             return redirect()->route('usuario.index')->with('success', 'Cadastro excluido com sucesso!');
         } catch (Exception $e) {
             DB::rollBack();
-            dd($e);
             Log::error($e);
             return redirect()->route('usuario.index')->with('message-error', $e->getMessage());
         }
