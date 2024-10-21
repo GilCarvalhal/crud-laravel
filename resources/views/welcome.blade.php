@@ -19,16 +19,16 @@
                 <input type="text" id="contato" name="contato" required>
             </div>
             <div>
+                <label for="cep">Cep:</label>
+                <input type="text" id="cep" name="cep" required>
+            </div>
+            <div>
                 <label for="endereco">Endereço:</label>
                 <input type="text" id="endereco" name="endereco" required>
             </div>
             <div>
                 <label for="bairro">Bairro:</label>
                 <input type="text" id="bairro" name="bairro" required>
-            </div>
-            <div>
-                <label for="cep">Cep:</label>
-                <input type="text" id="cep" name="cep" required>
             </div>
             <div>
                 <label for="cidade">Cidade:</label>
@@ -51,9 +51,9 @@
                     <th>Nome</th>
                     <th>Idade</th>
                     <th>Contato</th>
+                    <th>Cep</th>
                     <th>Endereço</th>
                     <th>Bairro</th>
-                    <th>Cep</th>
                     <th>Cidade</th>
                     <th>Estado</th>
                     <th>Número</th>
