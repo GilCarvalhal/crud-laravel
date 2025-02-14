@@ -3,46 +3,55 @@
 @section('title', 'Detalhes do Usuário')
 
 @section('content')
-    <div class="detalhes-usuario">
-        <h1>Detalhes do Usuário</h1>
-        <div>
-            <label for="nome"><strong>Nome:</strong></label>
-            <span id="nome">{{ $usuario->nome ?? 'Não informado' }}</span>
+    <div class="container mt-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4>Detalhes do Usuário</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <strong>Nome:</strong>
+                        <span class="form-control">{{ $usuario->nome ?? 'Não informado' }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Idade:</strong>
+                        <span class="form-control">{{ $usuario->idade ?? 'Não informado' }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Contato:</strong>
+                        <span class="form-control">{{ $usuario->contato ?? 'Não informado' }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>CEP:</strong>
+                        <span class="form-control">{{ $usuario->endereco->cep ?? 'Não informado' }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Endereço:</strong>
+                        <span class="form-control">{{ $usuario->endereco->endereco ?? 'Não informado' }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Bairro:</strong>
+                        <span class="form-control">{{ $usuario->endereco->bairro ?? 'Não informado' }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Cidade:</strong>
+                        <span class="form-control">{{ $usuario->endereco->cidade ?? 'Não informado' }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Estado:</strong>
+                        <span class="form-control">{{ $usuario->endereco->estado ?? 'Não informado' }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Número:</strong>
+                        <span class="form-control">{{ $usuario->endereco->numero ?? 'Não informado' }}</span>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="retornar()">Voltar</button>
+                </div>
+            </div>
         </div>
-        <div>
-            <label for="idade"><strong>Idade:</strong></label>
-            <span id="idade">{{ $usuario->idade ?? 'Não informado' }}</span>
-        </div>
-        <div>
-            <label for="contato"><strong>Contato:</strong></label>
-            <span id="contato">{{ $usuario->contato ?? 'Não informado' }}</span>
-        </div>
-
-        <div>
-            <label for="cep"><strong>Cep:</strong></label>
-            <span id="cep">{{ $usuario->endereco->cep ?? 'Não informado' }}</span>
-        </div>
-        <div>
-            <label for="endereco"><strong>Endereço:</strong></label>
-            <span id="endereco">{{ $usuario->endereco->endereco ?? 'Não informado' }}</span>
-        </div>
-        <div>
-            <label for="bairro"><strong>Bairro:</strong></label>
-            <span id="bairro">{{ $usuario->endereco->bairro ?? 'Não informado' }}</span>
-        </div>
-        <div>
-            <label for="cidade"><strong>Cidade:</strong></label>
-            <span id="cidade">{{ $usuario->endereco->cidade ?? 'Não informado' }}</span>
-        </div>
-        <div>
-            <label for="estado"><strong>Estado:</strong></label>
-            <span id="estado">{{ $usuario->endereco->estado ?? 'Não informado' }}</span>
-        </div>
-        <div>
-            <label for="numero"><strong>Número:</strong></label>
-            <span id="numero">{{ $usuario->endereco->numero ?? 'Não informado' }}</span>
-        </div>
-        <button type="button" class="btn-voltar" onclick="retornar()">Voltar</button>
     </div>
 @endsection
 

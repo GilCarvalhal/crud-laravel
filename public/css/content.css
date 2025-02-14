@@ -1,15 +1,12 @@
-* {
+html,
+body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    background-color: #ece7d5;
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-color: #ece7d5;
+.container {
+    min-height: calc(100vh - 150px);
+    padding-bottom: 50px;
 }
