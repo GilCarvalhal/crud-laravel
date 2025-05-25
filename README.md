@@ -5,10 +5,15 @@
 >> composer install (No terminal).
 ### No terminal digite:
 >> cp .env.example .env para caso não encontrar o .env na instalação.
+### Configurar o DB_ no env e logo após aplicar o comando:
+>>> php artisan migrate
 ### Para caso peça a chave de aplicação: 
 >> php artisan key:generate
 ### Utilize os quatro comandos abaixo para limpeza de cache e configurações:
 >> php artisan cache:clear
+
 >> php artisan config:clear
+
 >> php artisan route:clear
+
 >> php artisan view:clear
