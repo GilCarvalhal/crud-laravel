@@ -17,3 +17,25 @@
 >> php artisan route:clear
 
 >> php artisan view:clear
+
+### Criação do bd:
+>> CREATE DATABASE IF NOT EXISTS crud_laravel;
+
+>> create table endereco (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cep VARCHAR(10) NOT NULL,
+    endereco VARCHAR(200) NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    estado VARCHAR(2) NOT NULL,
+    numero VARCHAR(10) NOT NULL
+);
+
+>> create table usuario (
+    id INT not null AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    idade INT NOT NULL,
+    contato VARCHAR(20) NOT NULL,
+    endereco_id INT NOT NULL,
+    FOREIGN KEY (endereco_id) REFERENCES endereco(id) ON DELETE CASCADE
+);
