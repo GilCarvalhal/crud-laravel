@@ -39,3 +39,19 @@
     endereco_id INT NOT NULL,
     FOREIGN KEY (endereco_id) REFERENCES endereco(id) ON DELETE CASCADE
 );
+
+### Configuração do .env:
+
+>> DB_CONNECTION=mysql
+>> 
+>> DB_HOST=127.0.0.1
+>> 
+>> DB_PORT=3306
+>> 
+>> DB_DATABASE=crud_laravel
+>> 
+>> DB_USERNAME=root
+>> 
+>> DB_PASSWORD=root
+
+>> SESSION_DRIVER=database
